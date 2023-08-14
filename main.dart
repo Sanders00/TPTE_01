@@ -1,46 +1,49 @@
+import 'dart:io';
+import 'library.dart';
+
 void main() {
-  Author author1 = Author("samuel", 2000);
-  Book(title: 'livro1', author: author1, year: 2005);
-  author1.booksWritten.forEach((element) {
-    print(element.title);
-  });
-}
+  var library = Library();
 
-class Book {
-  String title;
-  Author author;
-  int year;
-  bool isBorrowed = false;
+  print('\nBem-vindo à Biblioteca!');
 
-  Book._internal(
-    this.title,
-    this.author,
-    this.year,
-  );
+  while (true) {
+    print('\nOpções:');
+    print('1 - Listar todos os livros');
+    print('2 - Listar livros disponiveis');
+    print('3 - Listar livros por autor');
 
-  factory Book(
-      {required String title, required Author author, required int year}) {
-    var book = Book._internal(title, author, year);
-    author.addBookWritten(book);
-    return book;
+    print('4 - Registrar usuários');
+    print('5 - Registrar livro');
+    print('6 - Registrar autor');
+
+    print('7 - Emprestar livro');
+    print('8 - Devolver livro');
+
+    print('9 - Sair');
+    //------------------------------------
+    var opcao = int.parse(stdin.readLineSync()!);
+
+    if (opcao == 1) {
+      library.listAllBooks();
+    } else if (opcao == 2) {
+      library.listBorrowedBooks();
+    } else if (opcao == 3) {
+      library.listBooksbyAuthor();
+    } else if (opcao == 4) {
+      library.registerUser();
+    } else if (opcao == 5) {
+      library.registerBook();
+    } else if (opcao == 6) {
+      library.registerAuthor();
+    } else if (opcao == 7) {
+      library.borrowBook();
+    } else if (opcao == 8) {
+      library.returnBook();
+    } else if (opcao == 9) {
+      print('Até logo!');
+      break;
+    } else {
+      print('Opção inválida. Tente novamente.');
+    }
   }
-}
-
-class Author {
-  String name;
-  int birthdayYear;
-  List<Book> booksWritten = List.empty(growable: true);
-
-  addBookWritten(Book book) {
-    booksWritten.add(book);
-  }
-
-  Author(this.name, this.birthdayYear);
-}
-
-class User {
-  String name;
-  String address;
-  List<Book> booksBorrowed;
-  User(this.address, this.booksBorrowed, this.name);
 }
