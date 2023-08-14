@@ -66,7 +66,8 @@ class Library {
     print('\n------ Livros Disponiveis ------');
     books.forEach((element) {
       if (!element.isBorrowed) {
-        print(element.title);
+        print(
+            "|| Titulo: ${element.title} -/- Disponibilidade: ${element.isBorrowed ? 'Indisponivel' : 'Disponivel'} ||");
       }
     });
   }
@@ -104,10 +105,9 @@ class Library {
     } catch (e) {
       print('Erro: $e');
     }
-    
   }
 
-  returnBook(){
+  returnBook() {
     try {
       print("Insira o nome do usuário: ");
       var name = stdin.readLineSync()!;
